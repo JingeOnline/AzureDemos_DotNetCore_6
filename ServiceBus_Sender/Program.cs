@@ -18,7 +18,8 @@ namespace ServiceBus_Sender
             string connectString = getJsonConfig("AzureServiceBusConnectionString");
             var clientOptions = new ServiceBusClientOptions
             {
-                TransportType = ServiceBusTransportType.AmqpWebSockets,  //使用443端口,如果不指定,默认使用5671和5672 
+                //这里指定了使用WebSockets协议，使用443端口发送消息，如果不指定，默认使用TCP协议，使用5671和5672端口。
+                TransportType = ServiceBusTransportType.AmqpWebSockets,
                 Identifier="jinge"   //为Identifier赋值并不起作用，估计basic套餐不支持。
             };
             client = new ServiceBusClient(connectString,clientOptions);
